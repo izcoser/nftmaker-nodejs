@@ -7,19 +7,17 @@ dotenv.config();
 const address = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D";
 
 // Block number or height
-const block = "20273146";
+const block = "14287507";
 
-const baseURL = `https://eth-mainnet.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY}/getOwnersForCollection`;
+const baseURL = `https://eth-mainnet.g.alchemy.com/nft/v2/${process.env.ALCHEMY_KEY}`;
 const url = `${baseURL}/getOwnersForCollection/?contractAddress=${address}&block=${block}`;
-console.log(url);
-
 
 var requestOptions = {
     method: 'get',
     redirect: 'follow'
 };
 
+const response = await fetch(url, requestOptions);
+const json = await response.json();
 
-fetch(url, requestOptions)
-    .then(response => console.log(response))
-    .catch(error => console.log('error', error))
+console.log({ json });
